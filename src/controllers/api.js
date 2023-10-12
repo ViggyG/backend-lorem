@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.replaceArrayTags = exports.replaceObjectTags = exports.generateDataArray = void 0;
-const generateDataArray = (obj, length) => {
+const dataLoader_1 = require("../service/dataLoader");
+const generateDataArray = (obj, numCopies) => {
     let res = [];
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < numCopies; i++) {
         const dataItem = Object.assign({}, obj);
         (0, exports.replaceObjectTags)(dataItem);
         res.push(dataItem);
@@ -41,5 +42,5 @@ const resolveValue = (value) => {
     return res;
 };
 function replaceTag(value) {
-    return 'blorg';
+    return (0, dataLoader_1.mapPoolToRandomData)(value);
 }

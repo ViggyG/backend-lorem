@@ -1,3 +1,5 @@
+import { randomRange } from '../util/tools';
+import { mapPoolToRandomData } from '../service/dataLoader'
 
 interface SchemaObject {
     [index: string]: string | SchemaObject | SchemaArray
@@ -6,9 +8,9 @@ interface SchemaObject {
 type SchemaArray = [string | SchemaObject | SchemaArray]
 
 
-export const generateDataArray = (obj: SchemaObject, length: number) => {
+export const generateDataArray = (obj: SchemaObject, numCopies: number) => {
     let res = []
-    for(let i=0; i<length; i++) {
+    for(let i=0; i<numCopies; i++) {
         const dataItem = { ...obj };
         replaceObjectTags(dataItem);
         res.push(dataItem);
@@ -49,5 +51,5 @@ const resolveValue = (value: string | SchemaObject | SchemaArray) => {
 }
 
 function replaceTag(value: string): string | SchemaObject | SchemaArray {
-    return 'blorg';
+    return mapPoolToRandomData(value);
 }
